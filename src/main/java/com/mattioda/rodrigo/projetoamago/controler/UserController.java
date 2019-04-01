@@ -8,9 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mattioda.rodrigo.projetoamago.DTO.PessoaDTO;
 import com.mattioda.rodrigo.projetoamago.model.Pessoa;
@@ -24,17 +27,23 @@ public class UserController {
 	private PessoaService pessoaService;
 	
 	@RequestMapping(method=RequestMethod.POST, path="/register")
-	public String register(@Valid PessoaDTO pessoaObjDto,
+	public ModelAndView register(@Valid @ModelAttribute("userForm") PessoaDTO pessoaObjDto,
 			BindingResult result, Model model, HttpSession session) {
+	
+		ModelAndView view= new ModelAndView("/index");
+		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
 		if(result.hasErrors()) {
 			model.addAttribute("hasErrors", result);
-			return "/register";
+			view.setViewName("/register");
+			return view;
 		}
+		
 		Pessoa pessoa= pessoaService.fromDTO(pessoaObjDto);
 		pessoa.setSenha(passwordEncoder.encode(pessoa.getSenha()));
 		pessoa=pessoaService.insert(pessoa);
-		return "redirect:index";
+		return view;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, path="/index")

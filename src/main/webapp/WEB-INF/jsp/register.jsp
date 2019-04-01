@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +24,7 @@
 			<p class="divider-text">
 				<span class="bg-light"></span>
 			</p>
-			<form action="/register" method="POST">
+			<form:form modelAttribute="userForm" action="/register" method="POST">
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text"> <i class="fa fa-user"></i>
@@ -31,7 +34,7 @@
 						type="text">
 					<input name="sobrenome" class="form-control" placeholder="Sobrenome"
 					type="text">
-				</div>
+				</div>			
 				<div class="form-group input-group">
 						<span class="input-group-text"> <i class="fa fa-user"></i>
 						</span>
@@ -84,7 +87,16 @@
 					<button type="submit" name="criarConta" value="criarConta" class="btn btn-primary btn-block">
 						Criar conta</button>
 				</div>
-			</form>
+
+				<form:errors path="nome" />
+				<form:errors path="sobrenome" />
+				<form:errors path="nomeUsuario" />
+				<form:errors path="email" />
+				<form:errors path="telefone" />
+				<form:errors path="senha" />
+				
+			</form:form>
+			
 		</article>
 	</div>
 	<script src="js/bootstrap.bundle.min.js"></script>

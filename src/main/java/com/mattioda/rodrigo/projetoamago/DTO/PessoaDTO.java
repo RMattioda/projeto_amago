@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -15,20 +16,30 @@ public class PessoaDTO implements Serializable{
 
 	private Integer id;
 	
-	@NotEmpty(message="Preenchimento obrigatório!")
-	@Length(min=5, message="O tamanho deve ser de no mínimo 5 caracteres")
+	@NotEmpty(message="Você deve preencher o nome e o sobrenome!")
+	@Pattern(regexp = "^[^-\\s][a-zA-ZÀ-ú ]*", message = "bla bla bla")
 	private String nome;
 	
+	@NotEmpty(message="Você deve preencher o nome e o sobrenome!")
 	private String sobrenome;	
 	
+	@NotEmpty(message="Preenchimento obrigatório!")
+	@Length(min=5, message="O tamanho deve ser de no mínimo 5 caracteres")
 	private String senha;
 	
 	@Column(unique=true)
+	@Length(min=5, message="O tamanho deve ser de no mínimo 5 caracteres")
 	private String nomeUsuario;
 	
-	@Email
+	
+	@Email(message="mensagem email")
 	@Column(unique=true)
 	private String email;
+	
+	@Pattern(regexp = "(^$|[0-9]{10})", message = "Número de telefone deve ter somente 10 dígitos")
+	@NotEmpty(message="mensagem telefone!")
+	private String telefone;
+	
 
 	public PessoaDTO() {
 	}
@@ -80,6 +91,16 @@ public class PessoaDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 
