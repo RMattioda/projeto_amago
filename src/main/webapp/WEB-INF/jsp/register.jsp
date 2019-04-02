@@ -18,7 +18,7 @@
 <body>
 
 
-	<div class="card bg-light">
+	<div class="bg-light">
 		<article class="card-body mx-auto" style="max-width: 400px;">
 			<h4 class="card-title mt-3 text-center">Crie sua conta</h4>
 			<p class="divider-text">
@@ -86,17 +86,21 @@
 				<div class="form-group">
 					<button type="submit" name="criarConta" value="criarConta" class="btn btn-primary btn-block">
 						Criar conta</button>
+				</div>	
+			<c:if test="${not empty hasErrors}">
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<form:errors path="nome" />
+					<form:errors path="sobrenome" />
+					<form:errors path="nomeUsuario" />
+					<form:errors path="email" />
+					<form:errors path="telefone" />
+					<form:errors path="senha" />
 				</div>
-
-				<form:errors path="nome" />
-				<form:errors path="sobrenome" />
-				<form:errors path="nomeUsuario" />
-				<form:errors path="email" />
-				<form:errors path="telefone" />
-				<form:errors path="senha" />
-				
-			</form:form>
-			
+			</c:if>		
+			</form:form>		
 		</article>
 	</div>
 	<script src="js/bootstrap.bundle.min.js"></script>

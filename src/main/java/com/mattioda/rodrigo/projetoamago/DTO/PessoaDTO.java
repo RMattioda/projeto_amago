@@ -16,28 +16,30 @@ public class PessoaDTO implements Serializable{
 
 	private Integer id;
 	
-	@NotEmpty(message="Você deve preencher o nome e o sobrenome!")
-	@Pattern(regexp = "^[^-\\s][a-zA-ZÀ-ú ]*", message = "bla bla bla")
+	@NotEmpty(message="Mensagem NOME!")
+	@Pattern(regexp = "^[^-\\s][a-zA-ZÀ-ú ]*", message = "Mensagem NOME Caracteres especiais")
 	private String nome;
 	
-	@NotEmpty(message="Você deve preencher o nome e o sobrenome!")
+	@NotEmpty(message="Mensagem SOBRENOME!")
 	private String sobrenome;	
 	
-	@NotEmpty(message="Preenchimento obrigatório!")
-	@Length(min=5, message="O tamanho deve ser de no mínimo 5 caracteres")
+	@NotEmpty(message="Mensagem SENHA!")
+	@Length(min=5, message="Tamanho mínimo SENHA")
 	private String senha;
 	
 	@Column(unique=true)
-	@Length(min=5, message="O tamanho deve ser de no mínimo 5 caracteres")
+	@NotEmpty(message="Mensagem NOMEUSUARIO!")
+	@Length(min=5, message="Tamanho mínimo NOMEUSUARIO")
 	private String nomeUsuario;
 	
 	
 	@Email(message="mensagem email")
 	@Column(unique=true)
+	@NotEmpty(message="Mensagem EMAIL!")
 	private String email;
 	
-	@Pattern(regexp = "(^$|[0-9]{10})", message = "Número de telefone deve ter somente 10 dígitos")
-	@NotEmpty(message="mensagem telefone!")
+	@Pattern(regexp = "(^$|[0-9]{10})", message = "numero TELEFONE 10 digitos")
+	@NotEmpty(message="mensagem TELEFONE!")
 	private String telefone;
 	
 
